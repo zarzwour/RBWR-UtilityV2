@@ -548,6 +548,42 @@ public partial class MainOverlayViewModel : ViewModelBase, IDisposable
 
 
     [RelayCommand]
+    public void OpenIslandingGuide()
+    {
+        OpenExternalUrl("https://rbwr.fandom.com/wiki/Islanding");
+    }
+
+    [RelayCommand]
+    public void OpenDiagnosticGuide()
+    {
+        OpenExternalUrl("https://rbwr.fandom.com/wiki/Malfunctions");
+    }
+
+    [RelayCommand]
+    public void OpenServerBrowser()
+    {
+        OpenExternalUrl("https://rbwr.hotment.dev/servers");
+    }
+
+    [RelayCommand]
+    public void OpenPointsPage()
+    {
+        OpenExternalUrl("https://rbwr.hotment.dev/points");
+    }
+
+    private static void OpenExternalUrl(string url)
+    {
+        try
+        {
+            Process.Start(new ProcessStartInfo(url) { UseShellExecute = true });
+        }
+        catch
+        {
+            // Keep the overlay running if the system browser cannot be launched.
+        }
+    }
+
+    [RelayCommand]
     public void SwitchTab(string tabName)
     {
         CurrentTab = tabName switch
